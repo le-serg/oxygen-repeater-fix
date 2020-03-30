@@ -89,9 +89,15 @@ class Oxygen_Repeater_Fix
 			return $out;
 		}, $output );
 
-		$existing_ids = get_option( 'oxy_repeater_ids' );
-		$new_ids = array_merge( $existing_ids, Oxygen_Repeater_Fix_IDs::get_ids() );
-		if ( $existing_ids != $new_ids ) {
+        $existing_ids = get_option( 'oxy_repeater_ids' );
+        
+        if( $existing_ids != false ) {
+            $new_ids = array_merge( $existing_ids, Oxygen_Repeater_Fix_IDs::get_ids() );
+        }else{
+            $new_ids = Oxygen_Repeater_Fix_IDs::get_ids();
+        }		
+        
+        if ( $existing_ids != $new_ids ) {
 			update_option( 'oxy_repeater_ids', $new_ids );
 		}
 
